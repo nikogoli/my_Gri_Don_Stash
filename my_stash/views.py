@@ -46,12 +46,25 @@ class SetItemAPIView(generics.ListAPIView):
             Lis.append(dic)
         return Response(Lis)
 
-class ItemTabeListAPIView(generics.ListAPIView):
+class ItemTabelListAPIView(generics.ListAPIView):
     permission_classes = (AllowAny,)
     serializer_class = LclassSerializer
     def get_queryset(self):
         return Large_class.objects.all()
-    #def list(self, request):
-    #    Lis = []
-    #    item_lis = []
-    #    queryset = self.get_queryset()
+    def list(self, request):
+        l_class_lis = [{"name": "All"}]
+        s_class_dic = {}
+        item_lis = []
+        queryset = self.get_queryset()
+        for lcls in LclassSerializer(queryset, many=True).data:
+            l_class_lis.append( {"name": lcls["name"]} )
+            s_class_dic[ lcls["name"] ] = lcls["small_class_set"]
+            item_lis.extend(lcls["item_set"])
+        s_class_dic["All"] = [{"name": "All"}]
+        Lis = [{
+            "large_classes": l_class_lis,
+            "small_classes": s_class_dic,
+            "items":item_lis
+        }]
+        return Response(Lis)
+
