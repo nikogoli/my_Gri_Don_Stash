@@ -52,14 +52,19 @@ class ItemTabelListAPIView(generics.ListAPIView):
     def get_queryset(self):
         return Large_class.objects.all()
     def list(self, request):
-        classes_lis = []
+        l_class_lis = [{"name": "All"}]
+        s_class_dic = {}
         item_lis = []
         queryset = self.get_queryset()
         for lcls in LclassSerializer(queryset, many=True).data:
-            scls_lis = [scls_set["name"] for scls_set in lcls["small_class_set"] ]
-            cls_dic = {lcls["name"]: scls_lis}
-            classes_lis.append(cls_dic)
+            l_class_lis.append( {"name": lcls["name"]} )
+            s_class_dic[ lcls["name"] ] = lcls["small_class_set"]
             item_lis.extend(lcls["item_set"])
-        Lis = [{"classes":classes_lis, "items":item_lis}]
+        s_class_dic["All"] = [{"name": "All"}]
+        Lis = [{
+            "large_classes": l_class_lis,
+            "small_classes": s_class_dic,
+            "items":item_lis
+        }]
         return Response(Lis)
 
