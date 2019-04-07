@@ -2,14 +2,8 @@ from django.shortcuts import render
 from rest_framework import generics
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
-from .models import Place, Large_class, Small_class, Item
-from .serializers import PlaceSerializer, LclassSerializer, SclassSerializer, ItemSerializer
-
-
-class PlaceListAPIView(generics.ListAPIView):
-    permission_classes = (AllowAny,)
-    serializer_class = PlaceSerializer
-    queryset = Place.objects.all()
+from .models import Place, Large_class, Small_class, Item, Itemset
+from .serializers import LclassSerializer, SclassSerializer, ItemSerializer, ItemsetSerializer
 
 class LclassListAPIView(generics.ListAPIView):
     permission_classes = (AllowAny,)
@@ -68,3 +62,7 @@ class ItemTabelListAPIView(generics.ListAPIView):
         }]
         return Response(Lis)
 
+class ItemsetListAPIView(generics.ListAPIView):
+    permission_classes = (AllowAny,)
+    serializer_class = ItemsetSerializer
+    queryset = Itemset.objects.all()

@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Place, Large_class, Small_class, Item
+from .models import Place, Large_class, Small_class, Item, Itemset
 
 class PlaceSerializer(serializers.ModelSerializer):
     class Meta:
@@ -12,6 +12,7 @@ class ItemSerializer(serializers.ModelSerializer):
     item_place = serializers.StringRelatedField()
     item_small_class = serializers.StringRelatedField()
     item_large_class = serializers.StringRelatedField()
+    belonged_set = serializers.StringRelatedField()
     class Meta:
         model = Item
         fields = (
@@ -21,7 +22,8 @@ class ItemSerializer(serializers.ModelSerializer):
             'item_small_class',
             'item_large_class',
             'is_set',
-            'set_name'
+            'set_name',
+            'belonged_set'
         )
 
 class SclassSerializer(serializers.ModelSerializer):
@@ -42,18 +44,14 @@ class LclassSerializer(serializers.ModelSerializer):
             'item_set'
         )
 
-class ItemSerializer(serializers.ModelSerializer):
-    item_place = serializers.StringRelatedField()
-    item_small_class = serializers.StringRelatedField()
-    item_large_class = serializers.StringRelatedField()
+class ItemsetSerializer(serializers.ModelSerializer):
+    owned_parts = ItemSerializer(many=True)
     class Meta:
-        model = Item
+        model = Itemset
         fields = (
             'id',
-        	'item_place',
             'name',
-            'item_small_class',
-            'item_large_class',
-            'is_set',
-            'set_name'
+            'is_lv94',
+            'contained_parts',
+            'owned_parts'
         )
