@@ -1,0 +1,926 @@
+{
+  "CM": [
+    {
+      "name": "Mythical Clairvoyant's Mantle",
+      "kind": "Shoulders",
+      "is_set": true
+    },
+    {
+      "name": "Mythical Legwraps of the Tranquil Mind",
+      "kind": "Pants",
+      "is_set": false
+    },
+    {
+      "name": "Mythical Runeplates of Ignaffar",
+      "kind": "Pants",
+      "is_set": false
+    },
+    {
+      "name": "Mythical Consumption of Agrivix",
+      "kind": "Off-hand",
+      "is_set": false
+    },
+    {
+      "name": "Mythical Infernal Knight's Pauldrons",
+      "kind": "Shoulders",
+      "is_set": true
+    },
+    {
+      "name": "Mythical Phantom-Thread Girdle",
+      "kind": "Belt",
+      "is_set": false
+    },
+    {
+      "name": "Mythical Infernal Knight's Girdle",
+      "kind": "Belt",
+      "is_set": false
+    },
+    {
+      "name": "Peerless Eye of Berobath",
+      "kind": "Amulet",
+      "is_set": false
+    },
+    {
+      "name": "Shard of Lost Souls",
+      "kind": "Amulet",
+      "is_set": true
+    },
+    {
+      "name": "Mythical Harbinger of Eternal Suffering",
+      "kind": "Two-gun",
+      "is_set": true
+    },
+    {
+      "name": "Mythical Divinsteel Shoulderguard",
+      "kind": "Shoulders",
+      "is_set": false
+    },
+    {
+      "name": "Lacerator Girdle",
+      "kind": "Belt",
+      "is_set": false
+    },
+    {
+      "name": "Megaslayer's Armguard",
+      "kind": "Gloves",
+      "is_set": true
+    },
+    {
+      "name": "Venomtongue Mantle",
+      "kind": "Shoulders",
+      "is_set": false
+    },
+    {
+      "name": "Mythical Fiendflesh Mantle",
+      "kind": "Shoulders",
+      "is_set": false
+    },
+    {
+      "name": "Mythical Grasp of Unchained Might",
+      "kind": "Gloves",
+      "is_set": false
+    },
+    {
+      "name": "Mythical Deviltongue",
+      "kind": "One-gun",
+      "is_set": false
+    },
+    {
+      "name": "Mythical Rala'Jax",
+      "kind": "Two-gun",
+      "is_set": false
+    },
+    {
+      "name": "Spellscourge Vanguard",
+      "kind": "Shoulders",
+      "is_set": true
+    },
+    {
+      "name": "Mythical Bloodfury Spaulders",
+      "kind": "Shoulders",
+      "is_set": false
+    },
+    {
+      "name": "Mythical Thornhide Leggurads",
+      "kind": "Pants",
+      "is_set": false
+    },
+    {
+      "name": "Blood orb of Ch'thon",
+      "kind": "Off-hand",
+      "is_set": false
+    },
+    {
+      "name": "Mythical Exonerator",
+      "kind": "One-gun",
+      "is_set": false
+    },
+    {
+      "name": "Mythical Girdel of Stolen Dreams",
+      "kind": "Belt",
+      "is_set": false
+    },
+    {
+      "name": "Mythical Fiendflesh Greaves",
+      "kind": "Boots",
+      "is_set": false
+    },
+    {
+      "name": "Mythical Sash of the Bloodlord",
+      "kind": "Belt",
+      "is_set": false
+    },
+    {
+      "name": "Mythical Venomspine Greaves",
+      "kind": "Boots",
+      "is_set": false
+    },
+    {
+      "name": "Mythical Herald of Blazing Ends",
+      "kind": "One-mace",
+      "is_set": false
+    },
+    {
+      "name": "Mindwarp",
+      "kind": "One-sword",
+      "is_set": false
+    },
+    {
+      "name": "Mythical Barrelsmith's Salvo",
+      "kind": "One-gun",
+      "is_set": true
+    },
+    {
+      "name": "Mythical Boneshatter Treads",
+      "kind": "Boots",
+      "is_set": false
+    },
+    {
+      "name": "Mythical Invoker's Blaze",
+      "kind": "Off-hand",
+      "is_set": true
+    },
+    {
+      "name": "Mythical Butcher of Burrwitch",
+      "kind": "One-ax",
+      "is_set": false
+    },
+    {
+      "name": "Valguur's Focus",
+      "kind": "Off-hand",
+      "is_set": true
+    },
+    {
+      "name": "Mythical Fiendscale Jacket",
+      "kind": "Armor",
+      "is_set": false
+    },
+    {
+      "name": "Mythical Beastcaller's Shroud",
+      "kind": "Armor",
+      "is_set": true
+    },
+    {
+      "name": "Mythical Infernal Knight's Jacket",
+      "kind": "Armor",
+      "is_set": true
+    },
+    {
+      "name": "Mythical Cortosian Scrolls",
+      "kind": "Shoulders",
+      "is_set": false
+    },
+    {
+      "name": "Mythical Shroud of Illusion",
+      "kind": "Armor",
+      "is_set": false
+    },
+    {
+      "name": "Mythical Chausses of Barbaros",
+      "kind": "Pants",
+      "is_set": false
+    },
+    {
+      "name": "Ring of the Black Matriarch",
+      "kind": "Ring",
+      "is_set": false
+    },
+    {
+      "name": "Mythical Beastcaller's Talisman",
+      "kind": "Medal",
+      "is_set": true
+    },
+    {
+      "name": "Mythical Rotdrinker Crest",
+      "kind": "Medal",
+      "is_set": false
+    },
+    {
+      "name": "Mythical Gildam Arcanum Commendation",
+      "kind": "Medal",
+      "is_set": false
+    },
+    {
+      "name": "Ultos' Gem",
+      "kind": "Amulet",
+      "is_set": true
+    },
+    {
+      "name": "Mythical Sigil of the Mear King",
+      "kind": "Medal",
+      "is_set": false
+    },
+    {
+      "name": "Bledetwister Signet",
+      "kind": "Ring",
+      "is_set": false
+    },
+    {
+      "name": "Mythical Iskandra's Texts",
+      "kind": "Off-hand",
+      "is_set": true
+    },
+    {
+      "name": "Light Defender Plate",
+      "kind": "Armor",
+      "is_set": true
+    },
+    {
+      "name": "Mythical Combustion Band",
+      "kind": "Ring",
+      "is_set": false
+    },
+    {
+      "name": "Mark of Divinity",
+      "kind": "Medal",
+      "is_set": false
+    },
+    {
+      "name": "Mythical Dreadscoscher",
+      "kind": "Two-gun",
+      "is_set": false
+    },
+    {
+      "name": "Mythical Arcanor Blade of Luminari",
+      "kind": "Two-sword",
+      "is_set": false
+    },
+    {
+      "name": "Mythical Timewarped Walkers",
+      "kind": "Boots",
+      "is_set": false
+    },
+    {
+      "name": "Mythical Touch of the Everliving Grove",
+      "kind": "Gloves",
+      "is_set": false
+    },
+    {
+      "name": "Mythical Ravager's Bite",
+      "kind": "One-ax",
+      "is_set": false
+    },
+    {
+      "name": "Mythical Death Omen",
+      "kind": "One-ax",
+      "is_set": false
+    },
+    {
+      "name": "Dawnbraker's Sledge",
+      "kind": "One-mace",
+      "is_set": true
+    },
+    {
+      "name": "Mark of Dark Dreams",
+      "kind": "Medal",
+      "is_set": false
+    },
+    {
+      "name": "Hellborne",
+      "kind": "Two-gun",
+      "is_set": false
+    }
+  ],
+  "NB": [
+    {
+      "name": "Mythical Time-Flux Band",
+      "kind": "Ring",
+      "is_set": false
+    },
+    {
+      "name": "Mythical Sovereign Ruby of Domination",
+      "kind": "Amulet",
+      "is_set": false
+    },
+    {
+      "name": "Mageslayer's Armugard",
+      "kind": "Gloves",
+      "is_set": true
+    },
+    {
+      "name": "Mythical Light's Defender Gauntlets",
+      "kind": "Gloves",
+      "is_set": true
+    },
+    {
+      "name": "Mythical Grasp of Unchained Might",
+      "kind": "Gloves",
+      "is_set": false
+    },
+    {
+      "name": "Galewing Treads",
+      "kind": "Boots",
+      "is_set": false
+    },
+    {
+      "name": "Stormbearers",
+      "kind": "Boots",
+      "is_set": false
+    },
+    {
+      "name": "Mythical Earthshatter Treads",
+      "kind": "Boots",
+      "is_set": false
+    },
+    {
+      "name": "Mythical Venomspine Greaves",
+      "kind": "Boots",
+      "is_set": false
+    },
+    {
+      "name": "Mythical Wyrmscale Footguards",
+      "kind": "Boots",
+      "is_set": false
+    },
+    {
+      "name": "Mythical Scale of Beronath",
+      "kind": "Belt",
+      "is_set": false
+    },
+    {
+      "name": "Mythical Threads of Mortality",
+      "kind": "Amulet",
+      "is_set": false
+    },
+    {
+      "name": "Mythical Signet of the Fallen",
+      "kind": "Ring",
+      "is_set": false
+    },
+    {
+      "name": "Mythical Phantom-Thread Gridle",
+      "kind": "Belt",
+      "is_set": false
+    },
+    {
+      "name": "Mythical Tome of Names",
+      "kind": "Off-hand",
+      "is_set": false
+    },
+    {
+      "name": "Mythical Morguul's Mortality",
+      "kind": "One-gun",
+      "is_set": false
+    },
+    {
+      "name": "Mythical hagarradian Enforcer",
+      "kind": "One-gun",
+      "is_set": false
+    },
+    {
+      "name": "Mythical Damnation",
+      "kind": "One-ax",
+      "is_set": false
+    },
+    {
+      "name": "Korba's Frenzy",
+      "kind": "One-ax",
+      "is_set": true
+    },
+    {
+      "name": "Uroboruuk's Mantle",
+      "kind": "Shoulders",
+      "is_set": true
+    },
+    {
+      "name": "Pauldrons of Octavius",
+      "kind": "Shoulders",
+      "is_set": true
+    },
+    {
+      "name": "Mythical Lifegiver Signet",
+      "kind": "Ring",
+      "is_set": false
+    },
+    {
+      "name": "Uroboruulk's Effigy",
+      "kind": "Off-hand",
+      "is_set": true
+    },
+    {
+      "name": "Mythical Bloodsong",
+      "kind": "One-sword",
+      "is_set": false
+    },
+    {
+      "name": "Mythical Crimson Spike",
+      "kind": "One-sword",
+      "is_set": false
+    },
+    {
+      "name": "Mythical Dracarries",
+      "kind": "One-dagger",
+      "is_set": false
+    },
+    {
+      "name": "Mythical Grim Fate",
+      "kind": "One-sword",
+      "is_set": false
+    },
+    {
+      "name": "Mythical Malakor's Infusion",
+      "kind": "One-mace",
+      "is_set": false
+    },
+    {
+      "name": "Mythical Spelldrinker",
+      "kind": "One-scepter",
+      "is_set": false
+    },
+    {
+      "name": "Mythical Razor of the Venomblade",
+      "kind": "One-sword",
+      "is_set": true
+    },
+    {
+      "name": "Mythical Ortus",
+      "kind": "One-sword",
+      "is_set": true
+    },
+    {
+      "name": "Mythical Fist of the Venomblade",
+      "kind": "One-mace",
+      "is_set": true
+    },
+    {
+      "name": "Mythical Fiendmaster Raiment",
+      "kind": "Armor",
+      "is_set": false
+    },
+    {
+      "name": "Mythical Vestments of Dreeg",
+      "kind": "Armor",
+      "is_set": true
+    },
+    {
+      "name": "Mythical Clairvoyants's Wand",
+      "kind": "One-scepter",
+      "is_set": true
+    },
+    {
+      "name": "Spark of Reality",
+      "kind": "One-scepter",
+      "is_set": false
+    },
+    {
+      "name": "Stornguard Pummeler",
+      "kind": "One-mace",
+      "is_set": true
+    },
+    {
+      "name": "Mythical Closed Fist of Vengence",
+      "kind": "Ring",
+      "is_set": true
+    },
+    {
+      "name": "Mythical Pyroclasm Mark",
+      "kind": "Medal",
+      "is_set": false
+    },
+    {
+      "name": "Avenger's Pauldrons",
+      "kind": "Shoulders",
+      "is_set": true
+    },
+    {
+      "name": "Valguur's Raiment",
+      "kind": "Armor",
+      "is_set": true
+    },
+    {
+      "name": "Mythical Nightblade's Reach",
+      "kind": "Two-sword",
+      "is_set": false
+    },
+    {
+      "name": "Mythical Demonbone Legplates",
+      "kind": "Pants",
+      "is_set": false
+    },
+    {
+      "name": "Mythical Infernal Brimstone",
+      "kind": "Two-mace",
+      "is_set": false
+    },
+    {
+      "name": "Mythical Guardian of Death's Gates",
+      "kind": "Two-ax",
+      "is_set": false
+    },
+    {
+      "name": "Mythical Bane of the Winter King",
+      "kind": "Two-sword",
+      "is_set": false
+    },
+    {
+      "name": "Mythical Wildblood Crusher",
+      "kind": "Two-mace",
+      "is_set": true
+    },
+    {
+      "name": "Mythical Blood Sigil of Ch'Thon",
+      "kind": "Medal",
+      "is_set": false
+    },
+    {
+      "name": "Mythical Demonslayer's Jacket",
+      "kind": "Armor",
+      "is_set": true
+    },
+    {
+      "name": "Mythical Valdun's Rifle",
+      "kind": "Two-gun",
+      "is_set": true
+    },
+    {
+      "name": "Mythical Will of Bysmiel",
+      "kind": "Amulet",
+      "is_set": false
+    },
+    {
+      "name": "Mythical Spritbinder Glyph",
+      "kind": "Ring",
+      "is_set": false
+    },
+    {
+      "name": "Mythical Reign of Ice and Fire",
+      "kind": "Ring",
+      "is_set": false
+    },
+    {
+      "name": "Mythical Flames of Wrath",
+      "kind": "Amulet",
+      "is_set": false
+    },
+    {
+      "name": "Mythical Thorn Girdle of the Misty Glade",
+      "kind": "Belt",
+      "is_set": false
+    },
+    {
+      "name": "Cataclysm's Pact",
+      "kind": "Belt",
+      "is_set": true
+    },
+    {
+      "name": "Deathguard Sigil",
+      "kind": "Ring",
+      "is_set": false
+    },
+    {
+      "name": "Mythical Invoker's Shocking Touch",
+      "kind": "Ring",
+      "is_set": true
+    },
+    {
+      "name": "Mythical Herald of the Apocalypse",
+      "kind": "Amulet",
+      "is_set": false
+    },
+    {
+      "name": "Blood Knight's Pendant",
+      "kind": "Amulet",
+      "is_set": true
+    },
+    {
+      "name": "Mythical Entropic Coil",
+      "kind": "Ring",
+      "is_set": false
+    },
+    {
+      "name": "Mythical Mark of the Dreadblade",
+      "kind": "Medal",
+      "is_set": false
+    },
+    {
+      "name": "Mythical Mark of the Forbidden",
+      "kind": "Medal",
+      "is_set": false
+    },
+    {
+      "name": "Mythical Voidmancer's Cord",
+      "kind": "Belt",
+      "is_set": false
+    },
+    {
+      "name": "Mythical Arcanum Sigillis",
+      "kind": "One-gun",
+      "is_set": false
+    },
+    {
+      "name": "Mythical Chestguard of Justice",
+      "kind": "Armor",
+      "is_set": true
+    },
+    {
+      "name": "Mythical Ulzuin's Flamespreader",
+      "kind": "Two-gun",
+      "is_set": true
+    },
+    {
+      "name": "Mythical Adversary",
+      "kind": "Two-gun",
+      "is_set": false
+    },
+    {
+      "name": "Feralmane Legplates",
+      "kind": "Pants",
+      "is_set": false
+    },
+    {
+      "name": "Mythical Clairvoyant's Rove",
+      "kind": "Armor",
+      "is_set": true
+    },
+    {
+      "name": "Farath's Cube",
+      "kind": "Off-hand",
+      "is_set": false
+    },
+    {
+      "name": "Cindertouch",
+      "kind": "Gloves",
+      "is_set": false
+    },
+    {
+      "name": "Mythical Evoker of Elgoloth",
+      "kind": "Two-gun",
+      "is_set": false
+    },
+    {
+      "name": "Mythical Riftwarped Grasp",
+      "kind": "Gloves",
+      "is_set": false
+    },
+    {
+      "name": "Mythical Codex of Truths",
+      "kind": "Off-hand",
+      "is_set": false
+    },
+    {
+      "name": "Blood Knight's Scrolls",
+      "kind": "Armor",
+      "is_set": true
+    },
+    {
+      "name": "Stronghodl Revolver",
+      "kind": "Two-gun",
+      "is_set": true
+    },
+    {
+      "name": "Megaslayer's Shoulderguard",
+      "kind": "Shoulders",
+      "is_set": true
+    },
+    {
+      "name": "Mythical Touch of the Everliving Grove",
+      "kind": "Gloves",
+      "is_set": false
+    },
+    {
+      "name": "Mythical Leviathan",
+      "kind": "Two-mace",
+      "is_set": false
+    },
+    {
+      "name": "Mythical Stormtitan Treads",
+      "kind": "Boots",
+      "is_set": false
+    },
+    {
+      "name": "Nightclaw",
+      "kind": "One-ax",
+      "is_set": false
+    },
+    {
+      "name": "Avenger's Crusher",
+      "kind": "Two-mace",
+      "is_set": true
+    },
+    {
+      "name": "Mythical Ixillor's Rageflame",
+      "kind": "Off-hand",
+      "is_set": false
+    },
+    {
+      "name": "Mythical Greaves of Ill Omens",
+      "kind": "Boots",
+      "is_set": false
+    },
+    {
+      "name": "Mythical Hellforged Legplates",
+      "kind": "Pants",
+      "is_set": false
+    },
+    {
+      "name": "Mythical Dawnbreaker's Shouldgurad",
+      "kind": "Shoulders",
+      "is_set": true
+    },
+    {
+      "name": "Mythical Divinersteel Hauberk",
+      "kind": "Armor",
+      "is_set": false
+    },
+    {
+      "name": "Mythical Infernal Knight's Pauldrons",
+      "kind": "Shoulders",
+      "is_set": true
+    },
+    {
+      "name": "Mythical Reaper of the Accursed",
+      "kind": "Off-hand",
+      "is_set": false
+    },
+    {
+      "name": "Mythical Skull of Gul'Amash",
+      "kind": "Off-hand",
+      "is_set": false
+    },
+    {
+      "name": "Darkblaze Incinerator",
+      "kind": "One-gun",
+      "is_set": false
+    },
+    {
+      "name": "Radaggan's Shroud",
+      "kind": "Armor",
+      "is_set": true
+    },
+    {
+      "name": "Mythical Agony",
+      "kind": "One-mace",
+      "is_set": false
+    },
+    {
+      "name": "Mythical Fiend's Resolve",
+      "kind": "Off-hand",
+      "is_set": false
+    },
+    {
+      "name": "Mythical Skybreach Bulwark",
+      "kind": "Shield",
+      "is_set": false
+    },
+    {
+      "name": "Mythical Anderos' Amplifier",
+      "kind": "One-gun",
+      "is_set": false
+    },
+    {
+      "name": "Mythical Trozan's Mantle",
+      "kind": "Shoulders",
+      "is_set": true
+    },
+    {
+      "name": "Mythical Bonescavenger's Deathgrips",
+      "kind": "Gloves",
+      "is_set": false
+    },
+    {
+      "name": "Mythical Vestment of the Great Guardian",
+      "kind": "Armor",
+      "is_set": false
+    },
+    {
+      "name": "Mythical Trozan's Vestments",
+      "kind": "Armor",
+      "is_set": true
+    },
+    {
+      "name": "Mythical Boneweave Girdle",
+      "kind": "Belt",
+      "is_set": false
+    },
+    {
+      "name": "Mythical Death's Reach",
+      "kind": "Two-ax",
+      "is_set": false
+    },
+    {
+      "name": "Mythical Obsdian Juggernaut",
+      "kind": "Two-mace",
+      "is_set": false
+    },
+    {
+      "name": "Mythical Iskandra's Pauldroms",
+      "kind": "Shoulders",
+      "is_set": true
+    },
+    {
+      "name": "Mythical Thornhide Legguards",
+      "kind": "Pants",
+      "is_set": false
+    },
+    {
+      "name": "Shoulderguard of Justice",
+      "kind": "Shoulders",
+      "is_set": true
+    },
+    {
+      "name": "Mythical Stormcage Legguards",
+      "kind": "Pants",
+      "is_set": false
+    },
+    {
+      "name": "Mythical Bloodrager's Shoulderguard",
+      "kind": "Shoulders",
+      "is_set": true
+    },
+    {
+      "name": "Ultos' hood",
+      "kind": "Helm",
+      "is_set": true
+    },
+    {
+      "name": "Mythical Overlord's Iron Grip",
+      "kind": "Gloves",
+      "is_set": false
+    },
+    {
+      "name": "Mythical Voidmancer's Cord",
+      "kind": "Belt",
+      "is_set": false
+    },
+    {
+      "name": "Mythical Blade Breaker Sash",
+      "kind": "Belt",
+      "is_set": false
+    },
+    {
+      "name": "Embercore Shoulderguard",
+      "kind": "Shoulders",
+      "is_set": false
+    },
+    {
+      "name": "Mythical Light's Oath",
+      "kind": "Ring",
+      "is_set": false
+    },
+    {
+      "name": "Mythical Spark of Ultos",
+      "kind": "One-scepter",
+      "is_set": false
+    },
+    {
+      "name": "Mythical Dreadweaver",
+      "kind": "One-scepter",
+      "is_set": false
+    },
+    {
+      "name": "Mythical Voidsteel Gauntlets",
+      "kind": "Gloves",
+      "is_set": false
+    },
+    {
+      "name": "Rimetongue Shoulderguard",
+      "kind": "Shoulders",
+      "is_set": true
+    },
+    {
+      "name": "Mythical Gutripper",
+      "kind": "Two-gun",
+      "is_set": false
+    },
+    {
+      "name": "Mythical Fateweaver's Mantle",
+      "kind": "Shoulders",
+      "is_set": false
+    },
+    {
+      "name": "Gildor's Pulverizer",
+      "kind": "Two-gun",
+      "is_set": false
+    },
+    {
+      "name": "Mythical Wraithwalkers",
+      "kind": "Boots",
+      "is_set": false
+    },
+    {
+      "name": "Mythical Vestments of Severed Faith",
+      "kind": "Armor",
+      "is_set": false
+    }
+  ]
+}

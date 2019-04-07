@@ -31,7 +31,7 @@
           <v-list-tile>
             <v-list-tile-content>
               <v-list-tile-title>
-                <router-link to="/SetItemList">セット装備</router-link>
+                <router-link to="/Setitem_List">セット装備</router-link>
               </v-list-tile-title>
             </v-list-tile-content>
           </v-list-tile>          
