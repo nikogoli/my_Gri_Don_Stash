@@ -63,8 +63,7 @@ export default {
       large_class_list: [],
       l_s_class_dict: {},
       small_class_list: [{"name": "All"}],
-      item_list: [],
-      classified: [],
+      item_list: []
     }
   },
   methods: {
@@ -75,17 +74,18 @@ export default {
     },
     Custom_filter(items, search, filter){
       let tmp_lis = []
+      let final_lis = []
       if (this.l_radios == "All") {
-        this.classified = items
+        final_lis = items
       } else {
         tmp_lis = items.filter(itm => itm.item_large_class == this.l_radios)
         if (this.selected_s_cls == "All") {
-          this.classified = tmp_lis
+          final_lis = tmp_lis
         } else {
-          this.classified = tmp_lis.filter(itm => itm.item_small_class == this.selected_s_cls)
+          final_lis = tmp_lis.filter(itm => itm.item_small_class == this.selected_s_cls)
         }
       }
-      return this.classified.filter(item => filter(item.name, search))
+      return final_lis.filter(item => filter(item.name, search))
     },
   },
   mounted: function () {
