@@ -20,26 +20,6 @@ class ItemListAPIView(generics.ListAPIView):
     serializer_class = ItemSerializer
     queryset = Item.objects.all()
 
-class SetItemAPIView(generics.ListAPIView):
-    permission_classes = (AllowAny,)
-    serializer_class = ItemSerializer
-    def get_queryset(self):
-        return Item.objects.filter(is_set = True)
-    def list(self, request):
-        Lis = []
-        queryset = self.get_queryset()
-        set_name_list = set([dic["set_name"] for dic in queryset.values("set_name")])
-        set_Dic = {}
-        for setnm in set_name_list:
-            set_Dic[setnm] = []
-        for itm in ItemSerializer(queryset, many=True).data:
-            belonged_set = set_Dic[itm["set_name"]]
-            belonged_set.append(itm)
-        for st in set_Dic.keys():
-            dic = {"name":st, "items":set_Dic[st]}
-            Lis.append(dic)
-        return Response(Lis)
-
 class ItemTabelListAPIView(generics.ListAPIView):
     permission_classes = (AllowAny,)
     serializer_class = LclassSerializer
