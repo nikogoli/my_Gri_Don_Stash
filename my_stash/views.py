@@ -2,14 +2,8 @@ from django.shortcuts import render
 from rest_framework import generics
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
-from .models import Place, Large_class, Small_class, Item
-from .serializers import PlaceSerializer, LclassSerializer, SclassSerializer, ItemSerializer
-
-
-class PlaceListAPIView(generics.ListAPIView):
-    permission_classes = (AllowAny,)
-    serializer_class = PlaceSerializer
-    queryset = Place.objects.all()
+from .models import Place, Large_class, Small_class, Item, Itemset
+from .serializers import LclassSerializer, SclassSerializer, ItemSerializer, ItemsetSerializer
 
 class LclassListAPIView(generics.ListAPIView):
     permission_classes = (AllowAny,)
@@ -25,26 +19,6 @@ class ItemListAPIView(generics.ListAPIView):
     permission_classes = (AllowAny,)
     serializer_class = ItemSerializer
     queryset = Item.objects.all()
-
-class SetItemAPIView(generics.ListAPIView):
-    permission_classes = (AllowAny,)
-    serializer_class = ItemSerializer
-    def get_queryset(self):
-        return Item.objects.filter(is_set = True)
-    def list(self, request):
-        Lis = []
-        queryset = self.get_queryset()
-        set_name_list = set([dic["set_name"] for dic in queryset.values("set_name")])
-        set_Dic = {}
-        for setnm in set_name_list:
-            set_Dic[setnm] = []
-        for itm in ItemSerializer(queryset, many=True).data:
-            belonged_set = set_Dic[itm["set_name"]]
-            belonged_set.append(itm)
-        for st in set_Dic.keys():
-            dic = {"name":st, "items":set_Dic[st]}
-            Lis.append(dic)
-        return Response(Lis)
 
 class ItemTabelListAPIView(generics.ListAPIView):
     permission_classes = (AllowAny,)
@@ -68,3 +42,7 @@ class ItemTabelListAPIView(generics.ListAPIView):
         }]
         return Response(Lis)
 
+class ItemsetListAPIView(generics.ListAPIView):
+    permission_classes = (AllowAny,)
+    serializer_class = ItemsetSerializer
+    queryset = Itemset.objects.all()

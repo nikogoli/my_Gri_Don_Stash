@@ -26,6 +26,13 @@ class Small_class(models.Model):
 	def __str__(self):
 		return f"{self.name}"
 
+class Itemset(models.Model):
+	name = models.CharField("セット名", max_length=128, default="")
+	is_lv94 = models.BooleanField("要求レベル94", default=True)
+	contained_parts = models.CharField("含まれる部位", max_length=128, default="")
+	def __str__(self):
+		return f"{self.name}"
+
 class Item(models.Model):
 	item_place = models.ForeignKey(
 		Place, on_delete=models.SET_NULL, null=True
@@ -39,5 +46,9 @@ class Item(models.Model):
 	)
 	is_set = models.BooleanField("セット装備", default=False)
 	set_name = models.CharField("セット名", max_length=128, default="", blank=True)
+	belonged_set = models.ForeignKey(
+		Itemset, related_name = "owned_parts",
+		on_delete=models.SET_NULL, null=True, blank=True
+	)
 	def __str__(self):
 		return f"{self.name} ({self.item_small_class}) at {self.item_place}"

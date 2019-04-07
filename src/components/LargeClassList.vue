@@ -1,17 +1,17 @@
 <template>
   <v-container grid-list-md>
     <v-layout row justify-center align-center>
-      <v-flex v-for="l_cls in large_class_list" :key=l_cls.name >
-          <input type="radio" v-model="l_radios" name="radios" :value="l_cls.name" @change="Make_small_cls_list(l_cls.name)" /> {{l_cls.name}}
+      <v-flex xs12 v-for="l_class in l_class_list" :key=l_class.id >
+        <v-btn @click='Filter_item(l_class.name)'>
+          {{l_class.name}}
+        </v-btn>
       </v-flex>
     </v-layout>
     <v-layout row justify-center align-center>
       <v-flex xs3>
         <v-select
-          v-model="selected_s_cls"
-          :items="small_class_list"
-          item-text = "name"
-          item-value = "name"
+          v-model="selected_class"
+          :items="s_class_list"
           label="小分類"
           outline
         ></v-select>
@@ -34,7 +34,6 @@
           <template v-slot:items="lists">
             <td>{{lists.item.name}}</td>
             <td>{{lists.item.item_small_class}}</td>
-            <td>{{lists.item.item_large_class}}</td>
             <td>{{lists.item.item_place}}</td>
           </template>
         </v-data-table>
@@ -51,50 +50,54 @@ export default {
   name: 'LargeClassList',
   data () {
     return {
-      l_radios: "All",
-      selected_s_cls: "All",
       searched_name: "",
+      selected_class: "All",
+      l_class_list: [
+        {"id":1, "name":"All" },
+        {"id":2, "name":"Armors"},
+        {"id":3, "name":"Accessories"},
+        {"id":4, "name":"One-Weapons"},
+        {"id":5, "name":"Two-Weapons"}
+      ],
+      s_class_list: ["All"],
       headers: [
         {text: "アイテム名", sortable: true, value:"name"},
         {text: "小分類", sortable: true, value:"item_small_class"},
-        {text: "大分類", sortable: true, value:"item_large_class"},
         {text: "倉庫の場所", sortable: true, value:"item_place"},
       ],
-      large_class_list: [],
-      l_s_class_dict: {},
-      small_class_list: [{"name": "All"}],
-      item_list: []
+      classed_item_list: [],
+      item_list: [],
+      classified: [],
     }
   },
   methods: {
-    Make_small_cls_list: function(value) {
-      this.small_class_list = this.l_s_class_dict[value]
-      this.small_class_list.unshift({"name": "All"})
-      this.selected_s_cls= "All"
-    },
-    Custom_filter(items, search, filter){
-      let tmp_lis = []
-      let final_lis = []
-      if (this.l_radios == "All") {
-        final_lis = items
-      } else {
-        tmp_lis = items.filter(itm => itm.item_large_class == this.l_radios)
-        if (this.selected_s_cls == "All") {
-          final_lis = tmp_lis
-        } else {
-          final_lis = tmp_lis.filter(itm => itm.item_small_class == this.selected_s_cls)
+    Filter_item: function(value) {
+      this.item_list = []
+      this.s_class_list = ["All"]
+      this.selected_class = "All"
+      for (let cls of this.classed_item_list) {
+        if(cls["name"] == value) {
+          this.item_list = cls["item_set"]
+          for (let s_cls of cls["small_class_set"]) {
+            this.s_class_list.push(s_cls["name"])
+          }
         }
       }
-      return final_lis.filter(item => filter(item.name, search))
     },
+    Custom_filter(items, search, filter){
+      if (this.selected_class == "All") {
+        this.classified = items
+      } else {
+        this.classified = items.filter(itm => itm.item_small_class == this.selected_class)
+      }
+      return this.classified.filter(item => filter(item.name, search))
+    }
   },
   mounted: function () {
     console.log('mounted')
-    axios.get('/api/item_table/')
+    axios.get('/api/large_classes/')
       .then((response) => {
-        this.large_class_list = response.data["0"]["large_classes"]
-        this.l_s_class_dict = response.data["0"]["small_classes"]
-        this.item_list = response.data["0"]["items"]
+        this.classed_item_list = response.data
       })
       .catch((error) => {
         console.log(error)
