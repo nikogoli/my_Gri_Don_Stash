@@ -1,6 +1,6 @@
 <template>
-  <v-container>
-  <app-dialogue ref="child_Dialogue"></app-dialogue>
+  <v-container grid-list-md>
+    <app-dialogue ref="child_Dialogue"></app-dialogue>
     <v-layout row grid-list-lg justify-start align-center wrap>
         <v-flex md4 v-for="set of itemset_list" :key="set.name" >
           <v-card max-height="190px" min-height="150px"
@@ -8,32 +8,27 @@
             <v-card-title class="title mb-0 pb-0">
                 {{ make_title(set) }}
             </v-card-title>
-            <v-card-text>
-              <div v-for="row of make_check_list(set)" :key="row.get('part')">
-                <v-icon>{{row.get('icon')}}</v-icon> {{row.get("part")}}
-              </div>
-            </v-card-text>
+            <v-card-text></v-card-text>
           </v-card>
         </v-flex>
-    </v-layout>
+      </v-layout>
   </v-container>
 </template>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <script>
 import appDialogue from '@/components/part_Dialogue.vue'
 import axios from 'axios'
 
 export default {
-  name: 'Setitem_List',
+  name: 'HelloWorld',
   data () {
     return {
       itemset_list: []
     }
   },
   components: {
-    appDialogue
-  },
+      appDialogue
+    },
   methods: {
     make_title: function(dic) {
       if (dic.is_lv94 == false) {
@@ -78,11 +73,11 @@ export default {
       for (let row of this.make_check_list(dic)) {
         detail_mps.set( row.get("part"),
           new Map([
-            ["icon", row.get("icon")],
-            ["part", row.get("part")],
-            ["name", row.get("item")]
-          ])
-        )
+              ["icon", row.get("icon")],
+              ["part", row.get("part")],
+              ["name", row.get("item")]
+            ])
+          )
       }
       this.$refs.child_Dialogue.open(dic.name, detail_mps)
     }
