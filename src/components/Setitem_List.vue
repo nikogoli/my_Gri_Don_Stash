@@ -1,4 +1,6 @@
 <template>
+  <v-container>
+  <app-dialogue ref="child_Dialogue"></app-dialogue>
     <v-layout row grid-list-lg justify-start align-center wrap>
         <v-flex md4 v-for="set of itemset_list" :key="set.name" >
           <v-card max-height="190px" min-height="150px"
@@ -13,13 +15,14 @@
             </v-card-text>
           </v-card>
         </v-flex>
-      </v-layout>
+    </v-layout>
+  </v-container>
 </template>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <script>
+import appDialogue from '@/components/part_Dialogue.vue'
 import axios from 'axios'
-import DialogHelper from '@/components/DialogHelper.js'
 
 export default {
   name: 'Setitem_List',
@@ -27,6 +30,9 @@ export default {
     return {
       itemset_list: []
     }
+  },
+  components: {
+    appDialogue
   },
   methods: {
     make_title: function(dic) {
@@ -68,17 +74,17 @@ export default {
       return item_dic.values()
     },
     show_detail_dialog: function(dic) {
-      let dialog_txt = ""
+      let detail_mps = new Map()
       for (let row of this.make_check_list(dic)) {
-        dialog_txt += row.get("part") + ":\t " + row.get("item") + "\n"
+        detail_mps.set( row.get("part"),
+          new Map([
+            ["icon", row.get("icon")],
+            ["part", row.get("part")],
+            ["name", row.get("item")]
+          ])
+        )
       }
-      console.log(dialog_txt)
-      DialogHelper.showDialog(this, {
-        subject: dic.name,
-        message: dialog_txt,
-        ok: () => { console.log('click ok') },
-        cancel: () => { console.log('click cancel') }
-      })
+      this.$refs.child_Dialogue.open(dic.name, detail_mps)
     }
   },
   mounted: function () {
