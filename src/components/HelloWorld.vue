@@ -1,49 +1,92 @@
 <template>
   <v-container grid-list-md>
-    <v-layout row justify-center align-center>
-      <p>dialog sample.</p>
-      <button @click.prevent="showDialog">show</button>
-      <v-text-field
-          v-model="search_number"
-          append-icon="search"
-          label="数字"
-          single-line
-          hide-details
-        ></v-text-field>
+    <app-dialogue ref="child_Dialogue"></app-dialogue>
+    <v-layout row grid-list-lg justify-start align-center wrap>
+        <v-flex md4 v-for="set of itemset_list" :key="set.name" >
+          <v-card max-height="190px" min-height="150px"
+            max-width="330px" @click="show_detail_dialog(set)">
+            <v-card-title class="title mb-0 pb-0">
+                {{ make_title(set) }}
+            </v-card-title>
+            <v-card-text></v-card-text>
+          </v-card>
+        </v-flex>
       </v-layout>
   </v-container>
 </template>
 
 <script>
-import DialogHelper from '@/components/DialogHelper.js';
+import appDialogue from '@/components/part_Dialogue.vue'
 import axios from 'axios'
 
 export default {
   name: 'HelloWorld',
   data () {
     return {
-      item_list: [],
-      search_number: 0
+      itemset_list: []
     }
   },
-  methods: {
-    make_message: function () {
-      return this.item_list[this.search_number]
+  components: {
+      appDialogue
     },
-    showDialog () {
-      DialogHelper.showDialog(this, {
-        subject: 'Subject',
-        message: this.make_message(),
-        ok: () => { console.log('click ok') },
-        cancel: () => { console.log('click cancel') }
-      });
+  methods: {
+    make_title: function(dic) {
+      if (dic.is_lv94 == false) {
+        return dic.name + "　 (下位)"
+      } else {
+        return dic.name
+      }
+    },
+    make_check_list: function(dic) {
+      let item_dic = new Map()
+      const contained_part_list = dic.contained_parts.split(",").map(prt => prt.trim())
+      let count = 0
+      let sml_cls = ""
+      for (let part of contained_part_list) {
+        item_dic.set( part, 
+            new Map([
+              ["part", part],
+              ["item", ""],
+              ["owned", false],
+              ["icon", "check_box_outline_blank"]
+            ])
+        )
+      }
+      for (let itm of dic.owned_parts) {
+        if ( contained_part_list.includes(itm.item_small_class + "(1)") ) {
+          count += 1
+          sml_cls = itm.item_small_class + "(" + count.toString(10) +")"
+        } else {
+          sml_cls = itm.item_small_class
+        }
+        item_dic.set( sml_cls, 
+          new Map([
+            ["part", sml_cls], ["item", itm.name], 
+            ["owned", true], ["icon", "check_box"]
+          ])
+        )
+      }
+      return item_dic.values()
+    },
+    show_detail_dialog: function(dic) {
+      let detail_mps = new Map()
+      for (let row of this.make_check_list(dic)) {
+        detail_mps.set( row.get("part"),
+          new Map([
+              ["icon", row.get("icon")],
+              ["part", row.get("part")],
+              ["name", row.get("item")]
+            ])
+          )
+      }
+      this.$refs.child_Dialogue.open(dic.name, detail_mps)
     }
   },
   mounted: function () {
     console.log('mounted')
-    axios.get('/api/items/')
+    axios.get('/api/item_sets/')
       .then((response) => {
-        this.item_list = response.data
+        this.itemset_list = response.data
       })
       .catch((error) => {
         console.log(error)
@@ -51,21 +94,3 @@ export default {
   }
 }
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
-</style>
