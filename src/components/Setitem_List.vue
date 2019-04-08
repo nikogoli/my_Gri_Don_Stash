@@ -2,7 +2,7 @@
     <v-layout row grid-list-lg justify-start align-center wrap>
         <v-flex md4 v-for="set of itemset_list" :key="set.name" >
           <v-card max-height="190px" min-height="150px"
-            max-width="330px">
+            max-width="330px" @click="show_detail_dialog(set)">
             <v-card-title class="title mb-0 pb-0">
                 {{ make_title(set) }}
             </v-card-title>
@@ -19,6 +19,7 @@
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <script>
 import axios from 'axios'
+import DialogHelper from '@/components/DialogHelper.js'
 
 export default {
   name: 'Setitem_List',
@@ -66,6 +67,19 @@ export default {
       }
       return item_dic.values()
     },
+    show_detail_dialog: function(dic) {
+      let dialog_txt = ""
+      for (let row of this.make_check_list(dic)) {
+        dialog_txt += row.get("part") + ":\t " + row.get("item") + "\n"
+      }
+      console.log(dialog_txt)
+      DialogHelper.showDialog(this, {
+        subject: dic.name,
+        message: dialog_txt,
+        ok: () => { console.log('click ok') },
+        cancel: () => { console.log('click cancel') }
+      })
+    }
   },
   mounted: function () {
     console.log('mounted')
