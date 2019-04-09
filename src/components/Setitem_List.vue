@@ -78,7 +78,7 @@ export default {
       let detail_mps = this.items_maps_map.get( setmp.get("name") )
       this.$refs.child_Dialogue.open( setmp.get("name") , detail_mps)
     },
-    make_maps_with_nest: function (obj) {
+    one_nested_obj_to_map: function (obj) {
       let replaced_map = new Map()
       Object.entries(obj).map( ([key,val]) => {
         if (key.includes("ITEMLIST")) {
@@ -91,7 +91,7 @@ export default {
       return replaced_map
     },
     APIList_to_map: function (lis) {
-      return lis.map( itm => this.make_maps_with_nest(itm) )
+      return lis.map( itm => this.one_nested_obj_to_map(itm) )
     }
   },
   mounted: function () {
