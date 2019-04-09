@@ -47,7 +47,7 @@ class Item(models.Model):
 	is_set = models.BooleanField("セット装備", default=False)
 	set_name = models.CharField("セット名", max_length=128, default="", blank=True)
 	belonged_set = models.ForeignKey(
-		Itemset, related_name = "owned_parts",
+		Itemset, related_name = "owned_parts_ITEMLIST",
 		on_delete=models.SET_NULL, null=True, blank=True
 	)
 	def __str__(self):

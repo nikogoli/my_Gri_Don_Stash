@@ -2,15 +2,15 @@
   <v-container>
   <app-dialogue ref="child_Dialogue"></app-dialogue>
     <v-layout row grid-list-lg justify-start align-center wrap>
-        <v-flex md4 v-for="set of itemset_list" :key="set.name" >
+        <v-flex md4 v-for="setmap of itemset_list" :key="setmap.get('name')" >
           <v-card max-height="190px" min-height="150px"
-            max-width="330px" @click="show_detail_dialog(set)">
+            max-width="330px" @click="show_detail_dialog(setmap)">
             <v-card-title class="title mb-0 pb-0">
-                {{ make_title(set) }}
+                {{ make_title(setmap) }}
             </v-card-title>
             <v-card-text>
-              <div v-for="row of make_check_list(set)" :key="row.get('part')">
-                <v-icon>{{row.get('icon')}}</v-icon> {{row.get("part")}}
+              <div v-for="map of pickup_items_map(setmap)" :key="map.get('part')">
+                <v-icon>{{map.get('icon')}}</v-icon> {{map.get("part")}}
               </div>
             </v-card-text>
           </v-card>
@@ -28,70 +28,80 @@ export default {
   name: 'Setitem_List',
   data () {
     return {
-      itemset_list: []
+      itemset_list: [],
+      items_maps_map: new Map()
     }
   },
   components: {
     appDialogue
   },
   methods: {
-    make_title: function(dic) {
-      if (dic.is_lv94 == false) {
-        return dic.name + "　 (下位)"
+    make_title: function(mp) {
+      if (mp.get("is_lv94") == false) {
+        return mp.get("name") + "　 (下位)"
       } else {
-        return dic.name
+        return mp.get("name")
       }
     },
-    make_check_list: function(dic) {
-      let item_dic = new Map()
-      const contained_part_list = dic.contained_parts.split(",").map(prt => prt.trim())
+    pickup_items_map: function(setmp) {
+      return this.items_maps_map.get( setmp.get("name") )
+    },
+    make_items_map: function(mp) {
+      let items_map = new Map()
+      const contained_part_list = mp.get("contained_parts").split(",").map(prt => prt.trim())
+      contained_part_list.forEach( part => {
+        let default_map = new Map([
+            ["id", ""], ["item_place", ""], ["name", ""], ["part", part],
+            ["owned", false], ["icon", "check_box_outline_blank"] 
+        ])
+        items_map.set( part, default_map )
+      })
       let count = 0
-      let sml_cls = ""
-      for (let part of contained_part_list) {
-        item_dic.set( part, 
-            new Map([
-              ["part", part],
-              ["item", ""],
-              ["owned", false],
-              ["icon", "check_box_outline_blank"]
-            ])
-        )
-      }
-      for (let itm of dic.owned_parts) {
-        if ( contained_part_list.includes(itm.item_small_class + "(1)") ) {
+      mp.get("owned_parts_ITEMLIST").forEach(itm => {
+        let part_name = ""
+        let sml_cls = itm.get("item_small_class")
+        if ( contained_part_list.includes(sml_cls + "(1)") ) {
           count += 1
-          sml_cls = itm.item_small_class + "(" + count.toString(10) +")"
+          part_name = sml_cls + "(" + count.toString(10) +")"
         } else {
-          sml_cls = itm.item_small_class
+          part_name = sml_cls
         }
-        item_dic.set( sml_cls, 
-          new Map([
-            ["part", sml_cls], ["item", itm.name], 
-            ["owned", true], ["icon", "check_box"]
-          ])
-        )
-      }
-      return item_dic.values()
+        itm.delete("item_small_class")
+        itm.set( "part", part_name )
+        itm.set("owned", true)
+        itm.set("icon", "check_box")
+        items_map.set( part_name, itm)
+      })
+      return [ mp.get("name"), [...items_map.values()] ]
     },
-    show_detail_dialog: function(dic) {
-      let detail_mps = new Map()
-      for (let row of this.make_check_list(dic)) {
-        detail_mps.set( row.get("part"),
-          new Map([
-            ["icon", row.get("icon")],
-            ["part", row.get("part")],
-            ["name", row.get("item")]
-          ])
-        )
-      }
-      this.$refs.child_Dialogue.open(dic.name, detail_mps)
+    show_detail_dialog: function(setmp) {
+      let detail_mps = this.items_maps_map.get( setmp.get("name") )
+      this.$refs.child_Dialogue.open( setmp.get("name") , detail_mps)
+    },
+    one_nested_obj_to_map: function (obj) {
+      let replaced_map = new Map()
+      Object.entries(obj).map( ([key,val]) => {
+        if (key.includes("ITEMLIST")) {
+          let new_list = val.map( itm => new Map( Object.entries(itm) ) )
+          replaced_map.set( key, new_list )
+        } else {
+          replaced_map.set( key, val )
+        }
+      })
+      return replaced_map
+    },
+    APIList_to_map: function (lis) {
+      return lis.map( itm => this.one_nested_obj_to_map(itm) )
     }
   },
   mounted: function () {
     console.log('mounted')
     axios.get('/api/item_sets/')
       .then((response) => {
-        this.itemset_list = response.data
+        this.itemset_list = this.APIList_to_map(response.data)
+        this.items_maps_map = new Map(
+          this.itemset_list.map(mp => this.make_items_map(mp))
+        )
       })
       .catch((error) => {
         console.log(error)
