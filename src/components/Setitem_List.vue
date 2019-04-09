@@ -46,7 +46,7 @@ export default {
     pickup_items_map: function(setmp) {
       return this.items_maps_map.get( setmp.get("name") )
     },
-    make_check_list: function(mp) {
+    make_items_map: function(mp) {
       let items_map = new Map()
       const contained_part_list = mp.get("contained_parts").split(",").map(prt => prt.trim())
       contained_part_list.forEach( part => {
@@ -100,7 +100,7 @@ export default {
       .then((response) => {
         this.itemset_list = this.APIList_to_map(response.data)
         this.items_maps_map = new Map(
-          this.itemset_list.map(mp => this.make_check_list(mp))
+          this.itemset_list.map(mp => this.make_items_map(mp))
         )
       })
       .catch((error) => {
