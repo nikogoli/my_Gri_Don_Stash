@@ -45,7 +45,7 @@ class LclassSerializer(serializers.ModelSerializer):
         )
 
 class ItemsetSerializer(serializers.ModelSerializer):
-    owned_parts = ItemSerializer(many=True)
+    owned_parts_ITEMLIST = ItemSerializer(many=True)
     class Meta:
         model = Itemset
         fields = (
@@ -53,5 +53,5 @@ class ItemsetSerializer(serializers.ModelSerializer):
             'name',
             'is_lv94',
             'contained_parts',
-            'owned_parts'
+            'owned_parts_ITEMLIST'
         )
