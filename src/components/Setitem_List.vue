@@ -57,7 +57,7 @@ export default {
             ])
         )
       }
-      for (let itm of dic.owned_parts) {
+      for (let itm of dic.owned_parts_ITEMLIST) {
         if ( contained_part_list.includes(itm.item_small_class + "(1)") ) {
           count += 1
           sml_cls = itm.item_small_class + "(" + count.toString(10) +")"
