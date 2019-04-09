@@ -9,8 +9,8 @@
                 {{ make_title(setmap) }}
             </v-card-title>
             <v-card-text>
-              <div v-for="row of make_check_list(setmap)" :key="row.get('part')">
-                <v-icon>{{row.get('icon')}}</v-icon> {{row.get("part")}}
+              <div v-for="map of pickup_items_map(setmap)" :key="map.get('part')">
+                <v-icon>{{map.get('icon')}}</v-icon> {{map.get("part")}}
               </div>
             </v-card-text>
           </v-card>
@@ -28,7 +28,8 @@ export default {
   name: 'Setitem_List',
   data () {
     return {
-      itemset_list: []
+      itemset_list: [],
+      items_maps_map: new Map()
     }
   },
   components: {
@@ -42,15 +43,18 @@ export default {
         return mp.get("name")
       }
     },
+    pickup_items_map: function(setmp) {
+      return this.items_maps_map.get( setmp.get("name") )
+    },
     make_check_list: function(mp) {
-      let item_dic = new Map()
+      let items_map = new Map()
       const contained_part_list = mp.get("contained_parts").split(",").map(prt => prt.trim())
       contained_part_list.forEach( part => {
         let default_map = new Map([
             ["id", ""], ["item_place", ""], ["name", ""], ["part", part],
             ["owned", false], ["icon", "check_box_outline_blank"] 
         ])
-        item_dic.set( part, default_map )
+        items_map.set( part, default_map )
       })
       let count = 0
       mp.get("owned_parts_ITEMLIST").forEach(itm => {
@@ -66,22 +70,13 @@ export default {
         itm.set( "part", part_name )
         itm.set("owned", true)
         itm.set("icon", "check_box")
-        item_dic.set( part_name, itm)
+        items_map.set( part_name, itm)
       })
-      return item_dic.values()
+      return [ mp.get("name"), [...items_map.values()] ]
     },
-    show_detail_dialog: function(mp) {
-      let detail_mps = new Map()
-      for (let row of this.make_check_list(mp)) {
-        detail_mps.set( row.get("part"),
-          new Map([
-            ["icon", row.get("icon")],
-            ["part", row.get("part")],
-            ["name", row.get("name")]
-          ])
-        )
-      }
-      this.$refs.child_Dialogue.open(mp.name, detail_mps)
+    show_detail_dialog: function(setmp) {
+      let detail_mps = this.items_maps_map.get( setmp.get("name") )
+      this.$refs.child_Dialogue.open( setmp.get("name") , detail_mps)
     },
     make_maps_with_nest: function (obj) {
       let replaced_map = new Map()
@@ -104,6 +99,9 @@ export default {
     axios.get('/api/item_sets/')
       .then((response) => {
         this.itemset_list = this.APIList_to_map(response.data)
+        this.items_maps_map = new Map(
+          this.itemset_list.map(mp => this.make_check_list(mp))
+        )
       })
       .catch((error) => {
         console.log(error)
