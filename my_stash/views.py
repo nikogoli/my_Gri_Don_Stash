@@ -45,4 +45,25 @@ class ItemTabelListAPIView(generics.ListAPIView):
 class ItemsetListAPIView(generics.ListAPIView):
     permission_classes = (AllowAny,)
     serializer_class = ItemsetSerializer
-    queryset = Itemset.objects.all()
+    #queryset = Itemset.objects.all()
+    def get_queryset(self):
+        return Itemset.objects.all()
+    def list(self, requaet):
+        Lis = []
+        queryset = self.get_queryset()
+        for itmset in ItemsetSerializer(queryset, many=True).data:
+            set_dic = {}
+            header_dic = {}
+            for key in itmset.keys():
+                if key == "id":
+                    set_dic[key] = itmset[key]
+                    header_dic[key] = itmset[key]
+                elif key == "owned_parts_ITEMLIST":
+                    set_dic["content_items"] = itmset[key]
+                else:
+                    header_dic[key] = itmset[key]
+            set_dic["header_info"] = header_dic
+            Lis.append(set_dic)
+        return Response(Lis)
+            
+            
