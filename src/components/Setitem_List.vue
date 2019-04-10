@@ -2,15 +2,16 @@
   <v-container>
   <app-dialogue ref="child_Dialogue"></app-dialogue>
     <v-layout row grid-list-lg justify-start align-center wrap>
-        <v-flex md4 v-for="setmap of itemset_list" :key="setmap.get('name')" >
+        <v-flex md4 v-for="setmap of itemset_map_list" :key="setmap.get('id')" >
           <v-card max-height="190px" min-height="150px"
-            max-width="330px" @click="show_detail_dialog(setmap)">
+            max-width="330px"
+            @click="show_detail_dialog(setmap)">
             <v-card-title class="title mb-0 pb-0">
-                {{ make_title(setmap) }}
+                {{ make_title(setmap.get('header_info')) }}
             </v-card-title>
             <v-card-text>
-              <div v-for="map of pickup_items_map(setmap)" :key="map.get('part')">
-                <v-icon>{{map.get('icon')}}</v-icon> {{map.get("part")}}
+              <div v-for="itemmap of setmap.get('content_items')" :key="itemmap.get('part')">
+                <v-icon>{{itemmap.get('icon')}}</v-icon> {{itemmap.get("part")}}
               </div>
             </v-card-text>
           </v-card>
@@ -28,8 +29,7 @@ export default {
   name: 'Setitem_List',
   data () {
     return {
-      itemset_list: [],
-      items_maps_map: new Map()
+      itemset_map_list: []
     }
   },
   components: {
@@ -43,65 +43,59 @@ export default {
         return mp.get("name")
       }
     },
-    pickup_items_map: function(setmp) {
-      return this.items_maps_map.get( setmp.get("name") )
+    show_detail_dialog: function(setmp) {
+      const items_list = setmp.get("content_items")
+      const card_header = setmp.get("header_info")
+      this.$refs.child_Dialogue.open( card_header.get("name") , items_list)
     },
-    make_items_map: function(mp) {
-      let items_map = new Map()
-      const contained_part_list = mp.get("contained_parts").split(",").map(prt => prt.trim())
-      contained_part_list.forEach( part => {
-        let default_map = new Map([
-            ["id", ""], ["item_place", ""], ["name", ""], ["part", part],
-            ["owned", false], ["icon", "check_box_outline_blank"] 
+    arrange_cont_items_list: function(head_mp, cont_list) {
+      let mapped_cont = new Map()
+      const parts_list = head_mp.get("contained_parts").split(",").map(prt => prt.trim())
+      parts_list.forEach( part => {
+        const default_map = new Map([
+          ["name", ""], ["part", part], ["owned", false], ["icon", "check_box_outline_blank"] 
         ])
-        items_map.set( part, default_map )
+        mapped_cont.set( part, default_map )
       })
       let count = 0
-      mp.get("owned_parts_ITEMLIST").forEach(itm => {
+      cont_list.forEach(itm => {
+        let itm_map = new Map([...Object.entries(itm)])
         let part_name = ""
-        let sml_cls = itm.get("item_small_class")
-        if ( contained_part_list.includes(sml_cls + "(1)") ) {
+        let sml_cls = itm_map.get("item_small_class")
+        if ( parts_list.includes(sml_cls + "(1)") ) {
           count += 1
           part_name = sml_cls + "(" + count.toString(10) +")"
         } else {
           part_name = sml_cls
         }
-        itm.delete("item_small_class")
-        itm.set( "part", part_name )
-        itm.set("owned", true)
-        itm.set("icon", "check_box")
-        items_map.set( part_name, itm)
+        itm_map.delete("item_small_class")
+        itm_map.set("part", part_name )
+        itm_map.set("owned", true)
+        itm_map.set("icon", "check_box")
+        mapped_cont.set( part_name, itm_map)
       })
-      return [ mp.get("name"), [...items_map.values()] ]
+      return [...mapped_cont.values()]
     },
-    show_detail_dialog: function(setmp) {
-      let detail_mps = this.items_maps_map.get( setmp.get("name") )
-      this.$refs.child_Dialogue.open( setmp.get("name") , detail_mps)
-    },
-    one_nested_obj_to_map: function (obj) {
-      let replaced_map = new Map()
-      Object.entries(obj).map( ([key,val]) => {
-        if (key.includes("ITEMLIST")) {
-          let new_list = val.map( itm => new Map( Object.entries(itm) ) )
-          replaced_map.set( key, new_list )
-        } else {
-          replaced_map.set( key, val )
-        }
+    APIList_to_cardmaps: function (obj_lis) {
+      let cardmaps_list = []
+      obj_lis.forEach( obj => {
+        let mp = new Map([...Object.entries(obj)])
+        let head_mp = new Map( [...Object.entries( mp.get("header_info") )] )
+        let conts_list = mp.get("content_items")
+        let arranged_cont = this.arrange_cont_items_list(head_mp, conts_list)
+        mp.set( "header_info", head_mp)
+        mp.set( "content_items", arranged_cont)
+        cardmaps_list.push( mp )
       })
-      return replaced_map
-    },
-    APIList_to_map: function (lis) {
-      return lis.map( itm => this.one_nested_obj_to_map(itm) )
+      return cardmaps_list
     }
   },
   mounted: function () {
     console.log('mounted')
     axios.get('/api/item_sets/')
       .then((response) => {
-        this.itemset_list = this.APIList_to_map(response.data)
-        this.items_maps_map = new Map(
-          this.itemset_list.map(mp => this.make_items_map(mp))
-        )
+        this.itemset_map_list = this.APIList_to_cardmaps(response.data)
+        console.log(this.itemset_map_list)
       })
       .catch((error) => {
         console.log(error)
